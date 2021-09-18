@@ -10,10 +10,6 @@ on:
 jobs:  
   run_terraform:
     name: 'Run terraform'
-    needs: detect_dirs
-    strategy:
-      fail-fast: false
-      max-parallel: 2
     runs-on: ubuntu-latest
     defaults:
       run:
