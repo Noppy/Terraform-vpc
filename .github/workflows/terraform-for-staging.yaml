@@ -9,7 +9,7 @@ on:
 
 jobs:  
   run_terraform:
-    name: 'Run terraform'
+    name: 'Run terraform(staging)'
     runs-on: ubuntu-latest
     defaults:
       run:
