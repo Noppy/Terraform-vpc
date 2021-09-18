@@ -53,6 +53,7 @@ jobs:
           TARGET_DIR=$(git diff HEAD^ HEAD --name-only -- ${{ env.BASE_DIR }} | \
             sed 's:\(^${{ env.BASE_DIR }}/[^/]*\)*.*$:\1:'| \
             sort | uniq | \
+            awk '{ if( system("[ -d "$1" ]") == 0 ){print $1} }' | \
             jq -scR 'split("\n") | .[:-1]');
 
         # For pull req
@@ -63,6 +64,7 @@ jobs:
           TARGET_DIR=$(git diff origin/${TARGET_BRANCH} HEAD --name-only -- ${{ env.BASE_DIR }} | \
             sed 's:\(^${{ env.BASE_DIR }}/[^/]*\)*.*$:\1:'| \
             sort | uniq | \
+            awk '{ if( system("[ -d "$1" ]") == 0 ){print $1} }' | \
             jq -scR 'split("\n") | .[:-1]');
         fi
         echo "::endgroup::"
