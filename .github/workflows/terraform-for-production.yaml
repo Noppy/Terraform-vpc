@@ -3,9 +3,9 @@ on:
   push:
     branches:
       - production
-    paths:
-      - "envs/**"
   pull_request:
+    branches:
+      - production
 
 jobs:  
   run_terraform:
