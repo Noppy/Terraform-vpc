@@ -5,8 +5,7 @@ on:
       - staging
   pull_request:
     branches:
-      - staging
-
+      - stagingds
 jobs:  
   run_terraform:
     name: 'Run terraform(staging)'
@@ -17,9 +16,6 @@ jobs:
         working-directory: envs/staging
     environment:
           name: staging
-    env:
-        GITHUB_TOKEN: ${{ secrets.PERSONAL_TOKEN }}
-
     steps:
       - name: Checkout repository
         uses: actions/checkout@v2
@@ -35,16 +31,16 @@ jobs:
           aws-region: ap-northeast-1
 
       - name: Terraform Format
-        run: terraform fmt -check
+        run: terraform fmt -recursive -check -diff
 
       - name: Terraform Init
-        run: terraform init
+        run: terraform init -no-color
 
       - name: Terraform Validate
         run: terraform validate -no-color
 
       - name: Terraform Plan
-        run: terraform plan
+        run: terraform plan -no-color
 
       - name: Terraform Apply
         if: github.ref == 'refs/heads/staging' && github.event_name == 'push'
