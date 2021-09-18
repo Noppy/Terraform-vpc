@@ -1,3 +1,3 @@
 output "vpc" {
-  value = aws_vpc.main
+  value = aws_vpc.this
 }

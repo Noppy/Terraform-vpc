@@ -9,10 +9,6 @@ variable "vpcname" {
 }
 
 
-
-
-
-
 variable "vpc_cidr_block" {
   description = "The CIDR block for the VPC."
   type        = string
@@ -31,6 +27,10 @@ variable "enable_dns_hostnames" {
   default     = true
 }
 
+variable "create_igw" {
+  description = "Controls if an Internet Gateway is created."
+  type        = bool
+}
 
 variable "vpcflowlogsbucket" {
   description = "S3 bucket ARN for VPC Flow Logs."
