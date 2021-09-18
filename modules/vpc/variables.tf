@@ -32,6 +32,17 @@ variable "create_igw" {
   type        = bool
 }
 
+variable "availability_zone" {
+    description = "select AZ structure( 2az or 3az )"
+    type = string
+    default = "2az"
+}
+
+
+
+
+
+
 variable "vpcflowlogsbucket" {
   description = "S3 bucket ARN for VPC Flow Logs."
   type        = string
