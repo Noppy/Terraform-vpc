@@ -12,7 +12,7 @@ resource "aws_subnet" "publicsub1" {
 
 resource "aws_subnet" "publicsub2" {
   vpc_id            = aws_vpc.this.id
-  cidr_block        = cidrsubnet(var.vpc_cidr_block, local.pubsub_newbits, local.pubsub_netnum_base+1)
+  cidr_block        = cidrsubnet(var.vpc_cidr_block, local.pubsub_newbits, local.pubsub_netnum_base + 1)
   availability_zone = "ap-northeast-1d"
   tags = {
     Name = "${var.vpcname}-publicsub2"
@@ -23,7 +23,7 @@ resource "aws_subnet" "publicsub3" {
   count = var.availability_zone == "3az" ? 1 : 0
 
   vpc_id            = aws_vpc.this.id
-  cidr_block        = cidrsubnet(var.vpc_cidr_block, local.pubsub_newbits, local.pubsub_netnum_base+2)
+  cidr_block        = cidrsubnet(var.vpc_cidr_block, local.pubsub_newbits, local.pubsub_netnum_base + 2)
   availability_zone = "ap-northeast-1c"
   tags = {
     Name = "${var.vpcname}-publicsub3"
