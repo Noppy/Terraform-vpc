@@ -1,5 +1,24 @@
 
 
+# General attributes -------------
+variable "region" {
+  description = "Specify the region to apply."
+  type        = string
+  default     = "ap-northeast-1" // for Tokyo Region
+}
+
+variable "az_id" {
+  description = "specify AZ Ids"
+  type        = list(string)
+  default     = ["apne1-az4", "apne1-az1", "apne1-az2"] // for Tokyo Region(Specify the AZ IDs of the three AZs)
+}
+
+# Availability Zone attributes ---
+variable "availability_zone" {
+  description = "select AZ structure( 2az or 3az )"
+  type        = string
+  default     = "2az"
+}
 
 # VPC attributes -----------------
 variable "vpcname" {
@@ -35,19 +54,6 @@ variable "create_igw" {
 variable "create_nagtw" {
   description = "Controls if NAT Gateway(s) are created."
   type        = bool
-}
-
-# Availability Zone attributes ---
-variable "availability_zone" {
-  description = "select AZ structure( 2az or 3az )"
-  type        = string
-  default     = "2az"
-}
-
-variable "az_id" {
-  description = "specify AZ Ids"
-  type        = list(string)
-  default     = ["apne1-az4", "apne1-az1", "apne1-az2"] // for Tokyo Region
 }
 
 # DHCP Option set ----------------
