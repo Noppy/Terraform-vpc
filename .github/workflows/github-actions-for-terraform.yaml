@@ -51,7 +51,6 @@ jobs:
           echo "TAGET_BRANCE = ${TARGET_BRANCH}"
           git fetch --depth 2 origin ${TARGET_BRANCH}
           TARGET_DIR=$(git diff HEAD^ HEAD --name-only -- ${{ env.BASE_DIR }} | \
-            grep -v '^${{ env.BASE_DIR }}/${{ env.EXCLUDED_DIR }}' | \
             sed 's:\(^${{ env.BASE_DIR }}/[^/]*\)*.*$:\1:'| \
             sort | uniq | \
             jq -scR 'split("\n") | .[:-1]');
@@ -61,9 +60,7 @@ jobs:
           TARGET_BRANCH="${{ github.base_ref }}"  
           echo "TAGET_BRANCE = ${TARGET_BRANCH}"
           git fetch --depth 1 origin ${TARGET_BRANCH}
-          git diff origin/${TARGET_BRANCH} HEAD --name-only
           TARGET_DIR=$(git diff origin/${TARGET_BRANCH} HEAD --name-only -- ${{ env.BASE_DIR }} | \
-            grep -v '^${{ env.BASE_DIR }}/${{ env.EXCLUDED_DIR }}' | \
             sed 's:\(^${{ env.BASE_DIR }}/[^/]*\)*.*$:\1:'| \
             sort | uniq | \
             jq -scR 'split("\n") | .[:-1]');
