@@ -13,6 +13,24 @@ resource "aws_vpc" "this" {
 }
 
 ####################################################
+# DHCP Optoin set
+####################################################
+resource "aws_vpc_dhcp_options" "this" {
+
+  domain_name_servers = var.dhcp_options_domain_name_servers
+  ntp_servers         = var.dhcp_options_ntp_servers
+
+  tags = {
+    Name = "${var.vpcname}-dhcpoptionset"
+  }
+}
+
+resource "aws_vpc_dhcp_options_association" "this" {
+  vpc_id          = aws_vpc.this.id
+  dhcp_options_id = aws_vpc_dhcp_options.this.id
+}
+
+####################################################
 # IGW
 ####################################################
 resource "aws_internet_gateway" "this" {
@@ -20,7 +38,7 @@ resource "aws_internet_gateway" "this" {
 
   vpc_id = aws_vpc.this.id
   tags = {
-    "Name" = "${var.vpcname}-igw"
+    Name = "${var.vpcname}-igw"
   }
 }
 
