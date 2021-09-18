@@ -47,5 +47,5 @@ jobs:
         run: terraform plan
 
       - name: Terraform Apply
-        if: github.ref == 'refs/heads/staging' && ( github.event_name == 'push' || (github.event_name == 'workflow_dispatch' && github.event.inputs.Apply == 'true') )
+        if: github.ref == 'refs/heads/staging' && github.event_name == 'push'
         run: terraform apply -auto-approve
