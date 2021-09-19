@@ -74,3 +74,10 @@ variable "vpcflowlogsbucket" {
   description = "S3 bucket ARN for VPC Flow Logs."
   type        = string
 }
+
+# Security Groups --------------
+variable "sg_ec2_ssh_ingress_source_cidr" {
+  description = "CIDR block about source of SSH, default to undefined(blank). If you will enable it, set CIDR block(etc. '153.5.13.0/24')."
+  type        = string
+  default     = "" # etc. "153.5.13.0/24"
+}

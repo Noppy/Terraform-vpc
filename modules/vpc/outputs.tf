@@ -44,3 +44,12 @@ output "private2-rtb" {
 output "private3-rtb" {
   value = element(concat(aws_route_table.private3.*, tolist([""])), 0)
 }
+
+#--Security groups
+output "sg-vpce-sg" {
+  value = aws_security_group.vpc_endpoint_interface
+}
+
+output "sg-ec2-sg" {
+  value = aws_security_group.ec2
+}
