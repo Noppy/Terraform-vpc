@@ -32,3 +32,4 @@ fmt-check:
 .PHONY: fmt
 fmt:
 	$(TERRAFORM) fmt -recursive -diff
+	
