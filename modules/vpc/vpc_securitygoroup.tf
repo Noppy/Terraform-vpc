@@ -22,7 +22,7 @@ resource "aws_security_group" "vpc_endpoint_interface" {
     cidr_blocks = ["0.0.0.0/0"]
   }
   tags = {
-    Name = "${var.vpcname}-vpce-sg"
+    Name = "${var.vpcname}-sg-vpce"
   }
 }
 
@@ -38,7 +38,7 @@ resource "aws_security_group" "ec2" {
     cidr_blocks = ["0.0.0.0/0"]
   }
   tags = {
-    Name = "${var.vpcname}-ec2-sg"
+    Name = "${var.vpcname}-sg-ec2"
   }
 }
 

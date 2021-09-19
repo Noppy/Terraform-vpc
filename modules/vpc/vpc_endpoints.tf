@@ -30,7 +30,7 @@ resource "aws_vpc_endpoint" "s3" {
   service_name = "com.amazonaws.${var.region}.s3"
   vpc_id       = aws_vpc.this.id
   tags = {
-    Name = "${var.vpcname}-vpce-s3"
+    Name = "${var.vpcname}-vpce-s3gw"
   }
 }
 
