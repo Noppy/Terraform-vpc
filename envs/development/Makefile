@@ -1,10 +1,7 @@
 # <使い方>
-# 1. terraformのファイルの整形を行う場合: make
-# 2. アカウント作成(OU移動前)のplan確認:  make 
-# 4. デプロイ
-#     OU移動前まで実行:       make apply_1st
-#     OU移動実行:            make apply_2nd
-#     一連のデプロイ操作を実行: make apply_all
+# 1. コードの整形を行う: make fmt
+# 2. planを確認する:    make plan 
+# 4. デプロイ:         make apply
 
 TERRAFORM := terraform
 .DEFAULT_GOAL := fmt
