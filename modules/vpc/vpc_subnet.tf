@@ -6,7 +6,7 @@ resource "aws_subnet" "publicsub1" {
   cidr_block           = cidrsubnet(var.vpc_cidr_block, local.pubsub_newbits, local.pubsub_netnum_base)
   availability_zone_id = var.az_id[0]
   tags = {
-    Name = "${var.vpcname}-publicsub1"
+    Name = "${var.vpcname}-pubsub-${data.aws_availability_zone.AZs[var.az_id[0]].name_suffix}"
   }
 }
 
@@ -15,7 +15,7 @@ resource "aws_subnet" "publicsub2" {
   cidr_block           = cidrsubnet(var.vpc_cidr_block, local.pubsub_newbits, local.pubsub_netnum_base + 1)
   availability_zone_id = var.az_id[1]
   tags = {
-    Name = "${var.vpcname}-publicsub2"
+    Name = "${var.vpcname}-pubsub-${data.aws_availability_zone.AZs[var.az_id[1]].name_suffix}"
   }
 }
 
@@ -26,7 +26,7 @@ resource "aws_subnet" "publicsub3" {
   cidr_block           = cidrsubnet(var.vpc_cidr_block, local.pubsub_newbits, local.pubsub_netnum_base + 2)
   availability_zone_id = var.az_id[2]
   tags = {
-    Name = "${var.vpcname}-publicsub3"
+    Name = "${var.vpcname}-pubsub-${data.aws_availability_zone.AZs[var.az_id[2]].name_suffix}"
   }
 }
 
@@ -35,7 +35,7 @@ resource "aws_subnet" "privatesub1" {
   cidr_block           = cidrsubnet(var.vpc_cidr_block, 2, 0)
   availability_zone_id = var.az_id[0]
   tags = {
-    Name = "${var.vpcname}-privatesub1"
+    Name = "${var.vpcname}-privatesub-${data.aws_availability_zone.AZs[var.az_id[0]].name_suffix}"
   }
 }
 
@@ -44,7 +44,7 @@ resource "aws_subnet" "privatesub2" {
   cidr_block           = cidrsubnet(var.vpc_cidr_block, 2, 1)
   availability_zone_id = var.az_id[1]
   tags = {
-    Name = "${var.vpcname}-privatesub2"
+    Name = "${var.vpcname}-privatesub-${data.aws_availability_zone.AZs[var.az_id[1]].name_suffix}"
   }
 }
 
@@ -55,6 +55,6 @@ resource "aws_subnet" "privatesub3" {
   cidr_block           = cidrsubnet(var.vpc_cidr_block, 2, 2)
   availability_zone_id = var.az_id[2]
   tags = {
-    Name = "${var.vpcname}-privatesub3"
+    Name = "${var.vpcname}-privatesub-${data.aws_availability_zone.AZs[var.az_id[2]].name_suffix}"
   }
 }

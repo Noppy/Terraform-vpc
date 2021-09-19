@@ -25,7 +25,7 @@ resource "aws_route_table" "private1" {
   vpc_id = aws_vpc.this.id
 
   tags = {
-    Name = "${var.vpcname}-rtb-privatesub1"
+    Name = "${var.vpcname}-rtb-privatesub-${data.aws_availability_zone.AZs[var.az_id[0]].name_suffix}"
   }
 }
 
@@ -42,7 +42,7 @@ resource "aws_route_table" "private2" {
   vpc_id = aws_vpc.this.id
 
   tags = {
-    Name = "${var.vpcname}-rtb-privatesub2"
+    Name = "${var.vpcname}-rtb-privatesub-${data.aws_availability_zone.AZs[var.az_id[1]].name_suffix}"
   }
 }
 
@@ -61,7 +61,7 @@ resource "aws_route_table" "private3" {
   vpc_id = aws_vpc.this.id
 
   tags = {
-    Name = "${var.vpcname}-rtb-privatesub3"
+    Name = "${var.vpcname}-rtb-privatesub-${data.aws_availability_zone.AZs[var.az_id[2]].name_suffix}"
   }
 }
 
