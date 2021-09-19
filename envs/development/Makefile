@@ -10,7 +10,7 @@ TERRAFORM := terraform
 .DEFAULT_GOAL := fmt
 
 .PHONY: apply
-apply_1st: plan validate init fmt-check
+apply: plan validate init fmt-check
 	$(TERRAFORM) apply -auto-approve
 
 .PHONY: plan
