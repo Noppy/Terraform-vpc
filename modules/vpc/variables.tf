@@ -1,11 +1,6 @@
 
 
 # General attributes -------------
-variable "region" {
-  description = "Specify the region to apply."
-  type        = string
-  default     = "ap-northeast-1" // for Tokyo Region
-}
 
 variable "az_id" {
   description = "specify AZ Ids"

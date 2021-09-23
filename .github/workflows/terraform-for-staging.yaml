@@ -5,7 +5,7 @@ on:
       - staging
   pull_request:
     branches:
-      - stagingds
+      - staging
 jobs:  
   run_terraform:
     name: 'Run terraform(staging)'

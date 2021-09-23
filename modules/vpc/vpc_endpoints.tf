@@ -1,25 +1,29 @@
 ####################################################
 # VPCE(Interface type)
 ####################################################
-
 /*
 resource "aws_vpc_endpoint" "logs" {
-  service_name        = "com.amazonaws.${var.region}.logs"
-  vpc_id       = aws_vpc.this.id
+  service_name        = "com.amazonaws.${local.region}.logs"
+  vpc_id              = aws_vpc.this.id
   vpc_endpoint_type   = "Interface"
   private_dns_enabled = true
-  security_group_ids  = var.vpc_endpoint_logs_security_group_ids
-  subnet_ids = [
-    aws_subnet.private_1a_3az.id,
-    aws_subnet.private_1d_3az.id,
-    aws_subnet.private_1c_3az.id,
-  ]
+  security_group_ids  = [aws_security_group.vpc_endpoint_interface.id]
+  subnet_ids = (var.availability_zone == "3az" ?
+    [
+      aws_subnet.privatesub1.id,
+      aws_subnet.privatesub2.id,
+      aws_subnet.privatesub3[0].id
+    ] :
+    [
+      aws_subnet.privatesub1.id,
+      aws_subnet.privatesub2.id
+    ]
+  )
   tags = {
-    Name = "${var.account_name}-vpc-endpoint-logs"
+    Name = "${var.vpcname}-vpce-logs"
   }
 }
 */
-
 
 
 
@@ -27,7 +31,7 @@ resource "aws_vpc_endpoint" "logs" {
 # VPCE(S3/Gateway type)
 ####################################################
 resource "aws_vpc_endpoint" "s3" {
-  service_name = "com.amazonaws.${var.region}.s3"
+  service_name = "com.amazonaws.${local.region}.s3"
   vpc_id       = aws_vpc.this.id
   tags = {
     Name = "${var.vpcname}-vpce-s3gw"
@@ -56,7 +60,7 @@ resource "aws_vpc_endpoint_route_table_association" "s3_private3" {
 # VPCE(DynamoDB/Gateway type)
 ####################################################
 resource "aws_vpc_endpoint" "dynamodb" {
-  service_name = "com.amazonaws.${var.region}.dynamodb"
+  service_name = "com.amazonaws.${local.region}.dynamodb"
   vpc_id       = aws_vpc.this.id
   tags = {
     Name = "${var.vpcname}-vpce-dynamodb"
