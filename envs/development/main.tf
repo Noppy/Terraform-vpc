@@ -6,6 +6,7 @@ module "vpc-3az" {
   vpcname                        = "3azVpc"
   vpc_cidr_block                 = "10.1.3.0/24"
   availability_zone              = "3az" // "2az" or "3az"
+  az_id                          = ["apne1-az4", "apne1-az1", "apne1-az2"]
   create_igw                     = true
   create_nagtw                   = true
   sg_ec2_ssh_ingress_source_cidr = "27.0.0.0/8"
