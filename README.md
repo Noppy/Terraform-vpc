@@ -1,9 +1,11 @@
 # CreateVpcForTerraform
 # 概要
 terraformでVPCを作成するための汎用モジュール。
-- パラメータの指定で、以下の２タイプのVPCが作成可能
-  - 2AZタイプ: パブリックサブネット x 2、 プライベートサブネット x 2(パラメータ指定でIGWの有無を指定可能)
-  - 3AZタイプ: パブリックサブネット x 3、 プライベートサブネット x 3(パラメータ指定でIGWの有無を指定可能)
+- パラメータ指定で、以下の２タイプのVPCが作成可能
+  - 2AZタイプ: パブリックサブネット x 2、 プライベートサブネット x 2
+  - 3AZタイプ: パブリックサブネット x 3、 プライベートサブネット x 3
+- IGWとNATGWの有無をパラメータで指定可能
+- サブネット作成先AZは、TransigGW/PrivateLink接続を考慮しAZ IDで指定
 
 作成されるリソースは以下の通り
 - VPCの基本構成: 
@@ -32,11 +34,19 @@ module "vpc" {
   az_id                          = ["apne1-az4", "apne1-az1", "apne1-az2"]
   create_igw                     = true
   create_nagtw                   = true
-  sg_ec2_ssh_ingress_source_cidr = "27.0.0.0/8"
+  sg_ec2_ssh_ingress_source_cidr = "27.0.0.0/8" //ブランクを指定した場合はルール未作成
 
   vpcflowlogsbucket = "arn:aws:s3:::nobuyuf-tforg-test01-vpcflowlogs"
 }
 ```
+- パラメータは以下のとおり
+  - `vpcname`: VPC名
+  - `vpc_cidr_block` : VPCに割り当てるCIDR。SubnetのCIDRはVIPのCIDRから自動計算される
+  - `availability_zone` : VPCを2az構成にするか、3az構成にするかの指定
+  - `az_id` : subnet配置先をAZ IDで指定(クロスアカウントでのTransitGateway, PrivateLink利用を考慮しAZ ID指定とする)
+  - `create_igw`, `create_nagtw`: IGW、NATGWの作成有無。 `create_nagtw`をtureにする場合は、`create_igw`もtureにすること
+  - `sg_ec2_ssh_ingress_source_cidr` : EC2インスタンス用のセキュリティーグループのInbound SSH接続ルールに指定するsourceのCIDR指定。ブランク("")を指定すると、ルールは作成されない。
+
 
 モジュールのOutputsとして以下が利用可能
 - VPC
