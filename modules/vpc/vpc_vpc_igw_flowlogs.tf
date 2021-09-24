@@ -51,6 +51,6 @@ resource "aws_flow_log" "this" {
   traffic_type         = "ALL"
   vpc_id               = aws_vpc.this.id
   tags = {
-    Name = "${var.vpcname}-vpc-flow-log"
+    Name = "${var.vpcname}-vpc-flow-logs"
   }
 }

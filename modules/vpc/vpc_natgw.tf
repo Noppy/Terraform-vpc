@@ -9,7 +9,7 @@ resource "aws_eip" "natgw1" {
 
   vpc = true
   tags = {
-    Name = "${var.vpcname}-eip-natgw-${data.aws_availability_zone.AZs[var.az_id[0]].name_suffix}"
+    Name = "${var.vpcname}-natgw-${data.aws_availability_zone.AZs[var.az_id[0]].name_suffix}"
   }
 }
 
@@ -18,7 +18,7 @@ resource "aws_eip" "natgw2" {
 
   vpc = true
   tags = {
-    Name = "${var.vpcname}-eip-natgw-${data.aws_availability_zone.AZs[var.az_id[1]].name_suffix}"
+    Name = "${var.vpcname}-natgw-${data.aws_availability_zone.AZs[var.az_id[1]].name_suffix}"
   }
 }
 
@@ -27,7 +27,7 @@ resource "aws_eip" "natgw3" {
 
   vpc = true
   tags = {
-    Name = "${var.vpcname}-eip-natgw-${data.aws_availability_zone.AZs[var.az_id[2]].name_suffix}"
+    Name = "${var.vpcname}-natgw-${data.aws_availability_zone.AZs[var.az_id[2]].name_suffix}"
   }
 }
 

@@ -20,7 +20,7 @@ resource "aws_vpc_endpoint" "logs" {
     ]
   )
   tags = {
-    Name = "${var.vpcname}-vpce-logs"
+    Name = "${var.vpcname}-logs"
   }
 }
 */
@@ -34,7 +34,7 @@ resource "aws_vpc_endpoint" "s3" {
   service_name = "com.amazonaws.${local.region}.s3"
   vpc_id       = aws_vpc.this.id
   tags = {
-    Name = "${var.vpcname}-vpce-s3gw"
+    Name = "${var.vpcname}-s3gw"
   }
 }
 
@@ -63,7 +63,7 @@ resource "aws_vpc_endpoint" "dynamodb" {
   service_name = "com.amazonaws.${local.region}.dynamodb"
   vpc_id       = aws_vpc.this.id
   tags = {
-    Name = "${var.vpcname}-vpce-dynamodb"
+    Name = "${var.vpcname}-dynamodb"
   }
 }
 

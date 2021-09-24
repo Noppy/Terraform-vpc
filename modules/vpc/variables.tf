@@ -19,7 +19,7 @@ variable "availability_zone" {
 variable "vpcname" {
   description = "Name to used on the VPC."
   type        = string
-  default     = "SampleVpc"
+  default     = "MainVpc"
 }
 
 variable "vpc_cidr_block" {

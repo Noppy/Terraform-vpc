@@ -22,13 +22,13 @@ resource "aws_security_group" "vpc_endpoint_interface" {
     cidr_blocks = ["0.0.0.0/0"]
   }
   tags = {
-    Name = "${var.vpcname}-sg-vpce"
+    Name = "${var.vpcname}-vpce"
   }
 }
 
 # SG for EC2 instances
 resource "aws_security_group" "ec2" {
-  name        = "${var.vpcname}-ec2-sg"
+  name        = "${var.vpcname}-ec2"
   description = "For EC2"
   vpc_id      = aws_vpc.this.id
   egress {
