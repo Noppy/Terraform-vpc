@@ -64,6 +64,19 @@ variable "dhcp_options_ntp_servers" {
   default     = ["169.254.169.123"]
 }
 
+# Subnet attributes -----
+variable "public_subnet_name" {
+  description = "Subnet Name prefix of public subnets"
+  type        = string
+  default     = "pubsub"
+}
+
+variable "private_subnet_name" {
+  description = "Subnet Name prefix of public subnets"
+  type        = string
+  default     = "privatesub"
+}
+
 # VPC Flow Logs attributes -----
 variable "vpcflowlogsbucket" {
   description = "S3 bucket ARN for VPC Flow Logs."
