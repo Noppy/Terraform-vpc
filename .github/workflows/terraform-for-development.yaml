@@ -1,4 +1,4 @@
-name: 'Terraform for development'
+name: "Terraform for development"
 on:
   push:
     branches:
@@ -6,20 +6,20 @@ on:
   pull_request:
     branches:
       - development
-jobs:  
+jobs:
   run_terraform:
-    name: 'Run terraform(development)'
+    name: "Run terraform(development)"
     runs-on: ubuntu-latest
     defaults:
       run:
         shell: bash
         working-directory: envs/development
     environment:
-          name: development
+      name: development
     steps:
       - name: Checkout repository
         uses: actions/checkout@v2
-      
+
       - name: Setup terraform
         uses: hashicorp/setup-terraform@v1
 
@@ -32,6 +32,15 @@ jobs:
 
       - name: Terraform Format
         run: terraform fmt -recursive -check -diff
+
+      - name: Test with Checkov
+        id: checkov
+        uses: bridgecrewio/checkov-action@master
+        with:
+          directory: .
+          framework: terraform
+          quiet: true
+          skip_check: LOW
 
       - name: Terraform Init
         run: terraform init -no-color

@@ -4,11 +4,23 @@
 # VPC
 ####################################################
 resource "aws_vpc" "this" {
+  #checkov:skip=CKV2_AWS_12:restricted by aws_default_security_group.default.
   cidr_block           = var.vpc_cidr_block
   enable_dns_support   = var.enable_dns_support
   enable_dns_hostnames = var.enable_dns_hostnames
   tags = {
     Name = var.vpcname
+  }
+}
+
+resource "aws_default_security_group" "default" {
+  vpc_id = aws_vpc.this.id
+
+  ingress {
+    protocol  = -1
+    self      = true
+    from_port = 0
+    to_port   = 0
   }
 }
 

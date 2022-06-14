@@ -5,6 +5,8 @@
 
 # SG for VPCE(Interface type)
 resource "aws_security_group" "vpc_endpoint_interface" {
+  #checkov:skip=CKV_AWS_23:Cannot be accessed from outside the VPC because it is a private subnet.
+  #checkov:skip=CKV2_AWS_5:There is no problem because it is used in the added VPCE module.
   name        = "${var.vpcname}-vpce-sg"
   description = "For VPC Endpoint Interface"
   vpc_id      = aws_vpc.this.id
