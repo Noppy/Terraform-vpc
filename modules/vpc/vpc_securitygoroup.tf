@@ -30,6 +30,8 @@ resource "aws_security_group" "vpc_endpoint_interface" {
 
 # SG for EC2 instances
 resource "aws_security_group" "ec2" {
+  #checkov:skip=CKV2_AWS_5:There is no problem because it is used in the added VPCE module.
+  #checkov:skip=CKV2_AWS_23:This is a requirement.
   name        = "${var.vpcname}-ec2"
   description = "For EC2"
   vpc_id      = aws_vpc.this.id
